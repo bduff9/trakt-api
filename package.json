@@ -1,0 +1,106 @@
+{
+  "name": "trakt-api",
+  "version": "0.0.1",
+  "description": "API to interact with my Trakt account.",
+  "keywords": [
+    "aswnn",
+    "trakt",
+    "typescript"
+  ],
+  "homepage": "https://www.asitewithnoname.com/",
+  "license": "MIT",
+  "author": "Brian Duffey <brian.e.duffey@gmail.com>",
+  "contributors": [],
+  "main": "src/index.tsx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bduff9/trakt-api.git"
+  },
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "env": "sync-dotenv",
+    "lint": "eslint . --quiet",
+    "lint:fix": "eslint . --quiet --fix",
+    "lint:script": "scriptlint && npmPkgJsonLint .",
+    "lint:script:fix": "scriptlint --fix",
+    "lint:style": "stylelint .",
+    "lint:style:fix": "stylelint . --fix",
+    "prepare": "husky install",
+    "setup": "npx typesync && npm i && npm prune",
+    "start": "next start",
+    "test": "jest --maxWorkers=50%",
+    "test:ci": "jest --ci --coverage --reporters='default' --reporters='./github-actions-reporter' --runInBand",
+    "test:watch": "jest --watch --maxWorkers=25%",
+    "validate": "npm run lint && tsc --noEmit && npx ts-prune"
+  },
+  "config": {},
+  "dependencies": {
+    "axios": "0.21.1",
+    "tslog": "3.2.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "7.28.0",
+    "@types/jest": "26.0.24",
+    "@types/node": "16.3.3",
+    "@typescript-eslint/eslint-plugin": "4.28.3",
+    "@typescript-eslint/parser": "4.28.3",
+    "eslint": "7.30.0",
+    "eslint-plugin-clean-regex": "0.5.1",
+    "eslint-plugin-graphql": "4.0.0",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-prettierx": "0.18.0",
+    "eslint-plugin-you-dont-need-momentjs": "1.6.0",
+    "husky": "7.0.1",
+    "jest": "27.0.6",
+    "lint-staged": "11.0.1",
+    "npm-package-json-lint": "5.1.0",
+    "scriptlint": "2.1.6",
+    "sync-dotenv": "2.6.2",
+    "ts-jest": "27.0.3",
+    "ts-node": "10.1.0",
+    "typescript": "4.3.5"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "private": true,
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --quiet --fix",
+      "git add"
+    ],
+    "*.{md,json,css,scss}": [
+      "prettierx --write",
+      "git add"
+    ],
+    "package.json": [
+      "scriptlint --fix --config .stylelintrc.json",
+      "npmPkgJsonLint .",
+      "git add"
+    ],
+    "*.js": "eslint --cache --fix",
+    "*.{css,scss}": "stylelint --fix"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    },
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.(ts|tsx)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "./node_modules/"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.jest.json"
+      }
+    }
+  }
+}
